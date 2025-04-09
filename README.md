@@ -71,7 +71,6 @@ Esse texto apresenta as emoções:
 Assistente:
 """
 
-print(entrada)
 ```
 
 ---
