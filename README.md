@@ -15,6 +15,10 @@ Certifique-se de ter instalado:
 - [Git](https://git-scm.com/)
 - [VS Code](https://code.visualstudio.com/) (ou outra IDE de sua preferência)
 - [Ollama](https://ollama.com) (executando em segundo plano)
+- transformers
+- torch
+- accelerate
+- sentencepiece
 
 Além disso, instale as dependências do Python:
 
@@ -83,8 +87,7 @@ Embora o prompt original esteja em inglês, o modelo suporta entradas em **portu
 
 ### 📁 Estrutura do Projeto
 
-- `main.py`: Código principal que executa o modelo.
-- `requisitos.txt`: Lista de bibliotecas necessárias.
+- `modelo.py`: Código principal que executa o modelo.
 - `README.md`: Este arquivo com instruções completas.
 
 ---
