@@ -4,7 +4,7 @@ model = LlamaForCausalLM.from_pretrained('lzw1008/Emollama-7b', device_map='auto
 
 prompt = '''Humano:
 Tarefa: Categorize a emoção expressada no texto como 'neutro ou sem emoção' ou identifique a presença de uma ou mais emoções das listadas (raiva, confusão, ansiedade, desgosto, medo, alegria, amor, otimismo, pessimismo, tristeza, surpresa, confiança).
-Texto: Como assim???? Como você fez isso?
+Texto: Qualquer coisa que você decida fazer tenha a certeza de que isso te faz feliz. 
 Esse texto contem a emoção:
 
 Assistente:
