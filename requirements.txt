@@ -1,0 +1,8 @@
+torch
+transformers
+pydantic
+accelerate
+sentencepiece
+python-dotenv
+protobuf
+pika
