@@ -3,8 +3,9 @@ from app.models import analise_sentimento
 from dotenv import load_dotenv
 import os
 import requests
+import json
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env.example'))
+load_dotenv()
 print("PORT =", os.getenv("PORT")) 
 
 class RabbitmqConsumer:
@@ -71,20 +72,35 @@ class RabbitmqConsumer:
 
 def minha_callback(ch, method, properties, body):
     try:
-        texto = body.decode("utf-8")
+        body_str = body.decode('utf-8')
+        body_dict = json.loads(body_str)
+        acao_id = body_dict.get("acao_id")
+        user_id = body_dict.get("user_id")
+        agent_id = body_dict.get("agent_id")
+        descricao = body_dict.get("descricao")
+        print(f"Mensagem JSON como dict: {body_dict}")
+        texto = body_dict.get("descricao", "")
+        if not texto:
+            print("Mensagem vazia recebida.")
+            return
         print(f"Mensagem recebida: {texto}")
 
-        resultado = analise_sentimento(texto)
+        resultado = analise_sentimento(descricao)
         print(f"Resultado da análise de sentimento: {resultado}")
 
-        api_url = os.getenv("API_DESTINO_URL")  
+        api_url = os.getenv("API_DESTINO_URL") 
+     
         payload = {
-            "texto": texto,
-            "resultado": resultado
+            "acao_id": acao_id,
+            "user_id": user_id,
+            "agent_id": agent_id,
+            "sentimento": resultado,
+            "score": 1,
+            "data_analise": "2023-10-01T12:00:00Z"
         }
         response = requests.post(api_url, json=payload)
 
-        if response.status_code == 200:
+        if response.status_code in (200, 201):
             print(f"Resultado enviado com sucesso para a API: {response.json()}")
         else:
             print(f"Erro ao enviar resultado para a API: {response.status_code}, {response.text}")
