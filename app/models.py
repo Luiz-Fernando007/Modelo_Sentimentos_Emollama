@@ -18,7 +18,7 @@ def analise_sentimento(texto: str) -> str:
         tokenizer.pad_token = tokenizer.eos_token
 
     prompt = f'''Humano:
-    Tarefa: Categorize a emoção expressada no texto como 'neutro' ou identifique a presença de uma ou mais emoções (satisfação, frustração, confusão, pressão, raiva).
+    Tarefa: Categorize a emoção expressada no texto como 'Neutro' ou identifique a presença de uma ou mais emoções (Satisfação, Frustração, Confusão, Pressão, Raiva).
     Texto: {texto}
     Esse texto contém a emoção:
 
@@ -40,6 +40,4 @@ def analise_sentimento(texto: str) -> str:
     response = tokenizer.batch_decode(output, skip_special_tokens=True)[0]
     resposta_final = response.split("Assistente:")[-1].strip()
 
-    print("Resposta:", resposta_final)
-
-analise_sentimento("Estou feliz!!")
+    return resposta_final
