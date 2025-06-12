@@ -78,6 +78,7 @@ def minha_callback(ch, method, properties, body):
         user_id = body_dict.get("user_id")
         agent_id = body_dict.get("agent_id")
         descricao = body_dict.get("descricao")
+        data = body_dict.get("data_acao")
         print(f"Mensagem JSON como dict: {body_dict}")
         texto = body_dict.get("descricao", "")
         if not texto:
@@ -96,7 +97,7 @@ def minha_callback(ch, method, properties, body):
             "agent_id": agent_id,
             "sentimento": resultado,
             "score": 1,
-            "data_analise": "2023-10-01T12:00:00Z"
+            "data_analise": data,
         }
         response = requests.post(api_url, json=payload)
 
